@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body style="padding: 50px;font-size: large;">
+<div th:if="${response.ok}">
+    <p th:text="'AccessToken : ' +  ${response.body.accessToken}"></p><br/>
+    <p th:text="'ResourceUri : ' +  ${response.body.endpointUrl}"></p><br/>
+</div>
+<div th:if="!${response.ok}">
+    <p th:text="'errorMsg : ' +  ${response.status.description}"></p>
+</div>
+
+</body>
+</html>
