@@ -8,18 +8,16 @@ public class AccessTokenHolder {
 
     public static AccessTokenHolder buildByXLResponse(XLResponse<AuthorizeAccessTokenResponse> response) {
         AuthorizeAccessTokenResponse tokenResponse = response.getBody();
-        return new AccessTokenHolder(tokenResponse.getAccessToken(), tokenResponse.getEndpointUrl());
+        return new AccessTokenHolder(tokenResponse.getAccessToken());
     }
 
     private String accessToken;
 
     private String resourceUri;
 
-    private AccessTokenHolder(String accessToken, String resourceUri) {
+    private AccessTokenHolder(String accessToken) {
         Assert.notNull(accessToken, "accessToken is required; it must not be null");
-        Assert.notNull(resourceUri, "resourceUri is required; it must not be null");
         this.accessToken = accessToken;
-        this.resourceUri = resourceUri;
     }
 
 
@@ -29,9 +27,5 @@ public class AccessTokenHolder {
 
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
-    }
-
-    public String getResourceUri() {
-        return resourceUri;
     }
 }

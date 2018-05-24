@@ -26,23 +26,33 @@ public class DemoController {
 
     private static final String ACCESS_TOKEN_EXPIRE_RETURN_CODE = "-21";
 
+    // 对应应用的appKey
     @Value("${client.id}")
     private String clientId;
 
+    // 对应应用的appSecret
     @Value("${client.secret}")
     private String clientSecret;
 
+    // 申请授权码后，迅联开放平台会携带授权码请求该地址
     @Value("${redirect.uri}")
     private String redirectUri;
 
+    // 申请授权码地址
     @Value("${auth.code.uri}")
     private String authCodeUri;
 
+    // 申请访问令牌地址
     @Value("${auth.access.token.uri}")
     private String authAccessTokenUri;
 
-    @Value("${test.resource.uri}")
-    private String testResourceUri;
+    // 资源服务地址
+    @Value("${resources.server}")
+    private String resourcesServer;
+
+    // 测试api
+    @Value("${test.api}")
+    private String testApi;
 
 
     /**
@@ -89,7 +99,6 @@ public class DemoController {
             request.getSession().setAttribute(ACCESS_TOKEN_SESSION_ATTR, accessTokenHolder);
         }
 
-
         model.addAttribute("response", response);
         return "index";
     }
@@ -112,7 +121,7 @@ public class DemoController {
         }
         AccessTokenHolder accessTokenHolder = (AccessTokenHolder) sessionAttrObj;
         // 资源服务网关地址 + api相对路径 = 资源服务完成地址
-        String fullResourceUri = accessTokenHolder.getResourceUri().concat(testResourceUri);
+        String fullResourceUri = resourcesServer.concat(testApi);
         // 访问资源服务
         /*
          *   ***注意***
